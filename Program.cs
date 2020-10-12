@@ -23,7 +23,7 @@ namespace RegexExp
                 }
                 else
                 {
-                    Console.WriteLine("Invalid First Name");
+                    throw new InvalidUserNameException("Invalid user name entered");
                 }
             }
             while (true)
@@ -39,7 +39,7 @@ namespace RegexExp
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Last Name");
+                    throw new InvalidUserNameException("Invalid  name entered");
                 }
             }
             while (true)
@@ -63,7 +63,7 @@ namespace RegexExp
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Email-Id");
+                    throw new InvalidEmailException("Invalid Email entered");
                 }
             }
             while (true)
@@ -79,7 +79,7 @@ namespace RegexExp
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Phone Number");
+                    throw new InvalidPhnNoException("Invalid Phone Number entered");
                 }
             }
             while (true)
@@ -95,7 +95,7 @@ namespace RegexExp
                 }
                 else
                 {
-                    Console.WriteLine("Enter password again with minimum 8 Characters with one capital letter");
+                    throw new InvalidPasswordException("Invalid Password entered");
                 }
             }
         }
