@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Text.RegularExpressions;
 using UserRegex;
 
 namespace RegexTest
@@ -14,7 +15,7 @@ namespace RegexTest
         public void FirstNameTest()
         {
             Program program = new Program();
-            Boolean act = program.FirstNameRegex();
+            Boolean act = program.FirstNameRegex("Ruthik");
             Assert.AreEqual(true, act);
         }
         /// <summary>
@@ -24,7 +25,7 @@ namespace RegexTest
         public void LastNameTest()
         {
             Program program = new Program();
-            Boolean act = program.LastNameRegex();
+            Boolean act = program.LastNameRegex("Reddy");
             Assert.AreEqual(true, act);
         }
         /// <summary>
@@ -34,7 +35,7 @@ namespace RegexTest
         public void EmailIdTest()
         {
             Program program = new Program();
-            Boolean act = program.Email_Id();
+            Boolean act = program.Email_Id("something@gmail.com");
             Assert.AreEqual(true, act);
         }
         /// <summary>
@@ -44,7 +45,7 @@ namespace RegexTest
         public void PhoneNumberTest()
         {
             Program program = new Program();
-            Boolean act = program.PhoneNumber();
+            Boolean act = program.PhoneNumber("91 1234567890");
             Assert.AreEqual(true, act);
         }
         /// <summary>
@@ -54,7 +55,7 @@ namespace RegexTest
         public void PasswordTest()
         {
             Program program = new Program();
-            Boolean act = program.Password();
+            Boolean act = program.Password("Ruthik998*");
             Assert.AreEqual(true, act);
         }
     }

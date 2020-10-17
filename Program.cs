@@ -15,11 +15,10 @@ namespace UserRegex
             Console.WriteLine("Welcome to User Registration Program");
 
         }
-        public Boolean FirstNameRegex()
+        public Boolean FirstNameRegex(string fname)
         {
             while (true)
             {
-                fname = "Ruthik";
                 name_pattern = @"^[A-Z]{1}[a-z]{2,}";
                 Regex regex = new Regex(name_pattern);
                 if (regex.IsMatch(fname))
@@ -34,11 +33,10 @@ namespace UserRegex
                 }
             }
         }
-        public Boolean LastNameRegex()
+        public Boolean LastNameRegex(string lname)
         {
             while (true)
             {
-                lname = "Reddy";
                 name_pattern = @"^[A-Z]{1}[a-z]{2,}";
                 Regex regex = new Regex(name_pattern);
                 if (regex.IsMatch(lname))
@@ -54,11 +52,11 @@ namespace UserRegex
             }
         }
 
-        public Boolean Email_Id()
+        public Boolean Email_Id(string email)
         {
             while (true)
             {
-                email = "something@gmail.com";
+                Console.WriteLine("Enter your Email-id: ");
                 email_pattern = @"^[A-Za-z]+[.+-]?[a-z]*[@][A-Za-z0-9]+[.][a-z]{2,}([.][a-z]{2})?$";
                 Regex regex = new Regex(email_pattern);
                 if (regex.IsMatch(email))
@@ -73,11 +71,10 @@ namespace UserRegex
                 }
             }
         }
-        public Boolean PhoneNumber()
+        public Boolean PhoneNumber(string phoneNo)
         {
             while (true)
             {
-                phoneNo = "91 1234567890 ";
                 phone_pattern = @"^[0-9]{2}[ ][0-9]{10}$";
                 Regex regex = new Regex(phone_pattern);
                 if (regex.IsMatch(phoneNo))
@@ -93,11 +90,10 @@ namespace UserRegex
             }
         }
 
-        public Boolean Password()
+        public Boolean Password(string password)
         {
             while (true)
             {
-                password = "Ruthik992*";
                 password_pattern = @"(?=.*[A-Z])(?=.*\w)(?=.*\d)(?=[^@$!%*^#?&]*[@$!%*^#?&][^@$!%^*#?&]*$).{8,}$";
                 Regex regex = new Regex(password_pattern);
                 if (regex.IsMatch(password))
