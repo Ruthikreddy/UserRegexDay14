@@ -2,34 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RegexExp
+namespace UserRegistration
 {
-    class InvalidUserNameException : Exception
+    public class UserException : Exception
     {
-        public InvalidUserNameException(string message) : base(message)
-        {
+        public enum error { Invalid_Name, Invalid_Email, Invalid_Password, Invalid_Mobile };
 
-        }
-    }
-    class InvalidEmailException : Exception
-    {
-        public InvalidEmailException(string message) : base(message)
-        {
+        public error errorType;
 
-        }
-    }
-    class InvalidPhnNoException : Exception
-    {
-        public InvalidPhnNoException(string message) : base(message)
+        public UserException(error error, string message) : base(message)
         {
-
-        }
-    }
-    class InvalidPasswordException : Exception
-    {
-        public InvalidPasswordException(string message) : base(message)
-        {
-
+            errorType = error;
         }
     }
 }

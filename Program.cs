@@ -1,111 +1,108 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace UserRegex
-
+namespace UserRegistration
 {
-    public class Program
-
+    class Program
     {
-        public static string fname, lname, email, phoneNo, password;
-        public static string name_pattern, email_pattern, phone_pattern, password_pattern;
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to User Registration Program");
+            Console.WriteLine("Welcome to User Registration!");
 
-        }
-        public Boolean FirstNameRegex(string fname)
-        {
-            while (true)
-            {
-                name_pattern = @"^[A-Z]{1}[a-z]{2,}";
-                Regex regex = new Regex(name_pattern);
-                if (regex.IsMatch(fname))
-                {
-                    Console.WriteLine("Valid First Name");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid First Name");
-                    return false;
-                }
-            }
-        }
-        public Boolean LastNameRegex(string lname)
-        {
-            while (true)
-            {
-                name_pattern = @"^[A-Z]{1}[a-z]{2,}";
-                Regex regex = new Regex(name_pattern);
-                if (regex.IsMatch(lname))
-                {
-                    Console.WriteLine("Valid Last Name");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Last Name");
-                    return false;
-                }
-            }
-        }
+            var user = new User();
 
-        public Boolean Email_Id(string email)
-        {
-            while (true)
-            {
-                Console.WriteLine("Enter your Email-id: ");
-                email_pattern = @"^[A-Za-z]+[.+-]?[a-z]*[@][A-Za-z0-9]+[.][a-z]{2,}([.][a-z]{2})?$";
-                Regex regex = new Regex(email_pattern);
-                if (regex.IsMatch(email))
-                {
-                    Console.WriteLine("Valid Email-Id: " + email);
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Email-Id");
-                    return false;
-                }
-            }
+            AskFirstName(user);
+            AskLastName(user);
+            AskEmail(user);
+            AskMobileNumber(user);
+            AskPassword(user);
+
+            var allEmails = "abc@yahoo.com abc-100@yahoo.com abc111@abc.com abc-100@abc.net " +
+                "abc.100@abc.com.au abc@1.com abc@gmail.com.com abc+100@gmail.com";
+            var allInvalidEMails = "abc abc@.com.my abc123@gmail.a abc123@.com abc123@.com.com .abc@abc.com abc()*@gmail.com " +
+                "abc@%*.com abc..2002@gmail.com abc.@gmail.com abc@gmail.com.1a abc@abc@gmail.com abc@gamil.com.aa.au";
+            CheckEmails(allEmails);
+            CheckEmails(allInvalidEMails);
         }
-        public Boolean PhoneNumber(string phoneNo)
+        /// <summary>
+        /// Asks the first name.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        public static void AskFirstName(User user)
         {
-            while (true)
-            {
-                phone_pattern = @"^[0-9]{2}[ ][0-9]{10}$";
-                Regex regex = new Regex(phone_pattern);
-                if (regex.IsMatch(phoneNo))
-                {
-                    Console.WriteLine("Valid Phone Number: " + phoneNo);
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Phone Number");
-                    return false;
-                }
-            }
+            Console.Write("Enter First Name :");
+            var firstName = Console.ReadLine();
+            if (user.ValidateFirstName(firstName))
+                user.firstName = firstName;
+            else
+                Console.WriteLine("Invalid first name. " +
+                    "It should have minimum 3 letters and only first letter as capital");
+        }
+        /// <summary>
+        /// Asks the last name.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        public static void AskLastName(User user)
+        {
+            Console.Write("Enter Last Name :");
+            var lastName = Console.ReadLine();
+            if (user.ValidateLastName(lastName))
+                user.lastName = lastName;
+            else
+                Console.WriteLine("Invalid Last name. " +
+                    "It should have minimum 3 letters and only first letter as capital");
         }
 
-        public Boolean Password(string password)
+        /// <summary>
+        /// Asks the email.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        public static void AskEmail(User user)
         {
-            while (true)
+            Console.Write("Enter Email :");
+            var email = Console.ReadLine();
+            if (user.ValidateEmail(email))
+                user.email = email;
+            else
+                Console.WriteLine("Invalid email. " +
+                    "It should be in the correct format E.g. abc.xyz@bl.co.in");
+        }
+
+        public static void AskMobileNumber(User user)
+        {
+            Console.Write("Enter Mobile Number : ");
+            var mobileNumber = Console.ReadLine();
+            if (user.ValidateMobileNumber(mobileNumber))
+                user.mobileNumber = mobileNumber;
+            else
+                Console.WriteLine("Invalid Moobile Number. " +
+                    "It should be in the correct format E.g. 91 9919819801");
+        }
+
+        public static void AskPassword(User user)
+        {
+            Console.Write("Enter Password : ");
+            var password = Console.ReadLine();
+            if (user.ValidatePassword(password))
+                user.password = password;
+            else
+                Console.WriteLine("Invalid Password. " +
+                    "It should have Minimum 8 characters, atleast 1 Upper Case, atleast 1 number and exactly 1 special character");
+        }
+
+        public static void CheckEmails(string allEmails)
+        {
+            var user = new User();
+            string[] emails = allEmails.Split(' ');
+            foreach (var email in emails)
             {
-                password_pattern = @"(?=.*[A-Z])(?=.*\w)(?=.*\d)(?=[^@$!%*^#?&]*[@$!%*^#?&][^@$!%^*#?&]*$).{8,}$";
-                Regex regex = new Regex(password_pattern);
-                if (regex.IsMatch(password))
-                {
-                    Console.WriteLine("Password set Successfully");
-                    return true;
-                }
+                Console.Write(email + " : ");
+                if (user.ValidateEmail(email))
+                    Console.Write("Valid");
                 else
-                {
-                    Console.WriteLine("Enter password again");
-                    return false;
-                }
+                    Console.Write("Invalid");
+                Console.WriteLine();
             }
         }
     }
